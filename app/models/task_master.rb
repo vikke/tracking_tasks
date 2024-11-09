@@ -1,0 +1,2 @@
+class TaskMaster < ApplicationRecord
+end

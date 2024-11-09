@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :task_masters
   root 'home#index'
 
   get 'auth/:provider/callback', to: 'sessions#create'
