@@ -1,15 +1,12 @@
 class HomeController < ApplicationController
   skip_before_action :check_logged_in, only: :index
 
-  def new
-    @task = Task.new
-  end
-
   def create
     task_name = params[:task_name]
     id = TaskMaster.where(task_name: task_name).first&.id
     if id.nil?
-      redirect_to home_path, notice: 'タスクがマスターに登録されていません'
+      redirect_to home_index_path, notice: 'タスクがマスターに登録されていません'
+      return
     end
 
     @task = Task.new(
@@ -19,7 +16,7 @@ class HomeController < ApplicationController
     )
 
     if @task.save
-      redirect_to root_path
+      redirect_to home_index_path
     else
       render :index
     end
@@ -31,6 +28,24 @@ class HomeController < ApplicationController
     @tasks = Task.where(user_id: current_user.id).order(id: :desc).limit(10).all
   end
 
+  def update
+    pparams = params.permit([:id, :action_type])
+    task = Task.find(pparams[:id])
+    if task.nil?
+      render status: :not_found
+      return
+    end
+    if task&.user&.id != current_user.id
+      render status: :forbidden
+      return
+    end
+
+    task.end_time = Time.now
+    task.save
+
+    redirect_to home_index_path
+ 
+  end
   private
 
     def task_params

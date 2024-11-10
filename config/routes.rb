@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :task_masters
-  root 'home#index'
-  post '/', to: 'home#create'
-  
+#  root 'home#index'
+#  post '/', to: 'home#create'
+#  patch '/:id', to: 'home#update'
+  resources :home, only: [:create, :update, :index, :update]
+  get '/', to: redirect('/home')
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
