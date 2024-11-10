@@ -1,2 +1,17 @@
 <h1>Home#index</h1>
 
+<% if current_user.present? %>
+  <% if @tasks.count == 0 || @tasks.first.end_time.present? %>
+    <%= form_with url: root_path do |form| %>
+      <%= form.label :query, "タスク名:" %>
+      <%= form.text_field :task_name%>
+      <%= form.submit "タスク登録" %>
+    <% end %>
+  <% else %>
+    <ul>
+    <% @tasks.each_with_index do |t, i| %>
+      <li><%= "#{i}: #{t.task_master.task_name}" %></li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>
