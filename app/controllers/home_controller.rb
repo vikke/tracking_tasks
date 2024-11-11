@@ -26,6 +26,7 @@ class HomeController < ApplicationController
     return if current_user.nil?
 
     @tasks = Task.where(user_id: current_user.id).order(id: :desc).limit(10).all
+    @task_masters = TaskMaster.all.sort
   end
 
   def update

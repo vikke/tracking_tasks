@@ -6,7 +6,12 @@
   <% if @tasks.count == 0 || @tasks.first.end_time.present? %>
     <%= form_with url: home_index_path do |form| %>
       <%= form.label :query, "実行タスク名:" %>
-      <%= form.text_field :task_name%>
+      <%= form.text_field :task_name, list: 'tasks'%>
+      <datalist id="tasks">
+        <% @task_masters&.each do |task| %>
+          <option value="<%= task.task_name %>" />
+        <% end %>
+      </datalist>
       <%= form.submit "実行タスク登録" %>
     <% end %>
   <% end %>

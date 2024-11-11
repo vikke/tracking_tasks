@@ -3,7 +3,7 @@ class TaskMastersController < ApplicationController
 
   # GET /task_masters or /task_masters.json
   def index
-    @task_masters = TaskMaster.all
+    @task_masters = TaskMaster.all.sort
   end
 
   # GET /task_masters/1 or /task_masters/1.json
