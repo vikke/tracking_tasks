@@ -20,8 +20,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_10_071552) do
   create_table "tasks", force: :cascade do |t|
     t.integer "task_master_id"
     t.integer "user_id"
-    t.time "start_time"
-    t.time "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
