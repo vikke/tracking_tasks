@@ -1,7 +1,7 @@
 databases:
   - name: tracking_tasks
     databaseName: tracking_tasks
-    user: <%= Rails.application.credentials.db[:user] %>
+    user: tracking_tasks_user
     plan: free
 
 services:
