@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  resources :task_masters
-#  root 'home#index'
-#  post '/', to: 'home#create'
-#  patch '/:id', to: 'home#update'
+  resources :tasks
   resources :home, only: [:create, :update, :index, :update]
   get '/', to: redirect('/home')
 
@@ -10,7 +7,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'log_out', to: 'sessions#destroy', as: 'log_out'
 
-  post 'tasks', to: 'tasks#create'
+  post 'task_records', to: 'task_records#create'
 
   resources :sessions, only: %i[create destroy]
 end
