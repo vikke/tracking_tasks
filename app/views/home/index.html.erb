@@ -3,12 +3,12 @@
 <p style="color: green"><%= notice %></p>
 
 <% if current_user.present? %>
-  <% if @tasks.count == 0 || @tasks.first.end_time.present? %>
+  <% if @task_records.count == 0 || @task_records.first.end_time.present? %>
     <%= form_with url: home_index_path do |form| %>
       <%= form.label :query, "実行タスク名:" %>
       <%= form.text_field :task_name, list: 'tasks'%>
       <datalist id="tasks">
-        <% @task_masters&.each do |task| %>
+        <% @tasks&.each do |task| %>
           <option value="<%= task.task_name %>" />
         <% end %>
       </datalist>
@@ -17,8 +17,8 @@
   <% end %>
 
   <ul>
-  <% @tasks.each_with_index do |t, i| %>
-    <li><%= "No.#{i}: #{t.task_master.task_name}"%><%= " / 開始: #{t.start_time}" %><%= " / #{t.end_time}" if t.end_time.present? %><%= " / #{t.spent_time} min." if t.spent_time.present? %>
+  <% @task_records.each_with_index do |t, i| %>
+    <li><%= "No.#{i}: #{t.task.task_name}"%><%= " / 開始: #{t.start_time}" %><%= " / #{t.end_time}" if t.end_time.present? %><%= " / #{t.spent_time} min." if t.spent_time.present? %>
     <%= form_with url: home_path(t), method: :patch do |form| %>
       <%= form.hidden_field(:id, value: t.id) %>
       <% if t.end_time.nil? %>

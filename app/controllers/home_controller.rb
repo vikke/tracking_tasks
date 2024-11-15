@@ -41,8 +41,8 @@ class HomeController < ApplicationController
       return
     end
 
-    task.end_time = Time.current
-    task.save
+    task_record.end_time = Time.current
+    task_record.save
 
     redirect_to home_index_path
  

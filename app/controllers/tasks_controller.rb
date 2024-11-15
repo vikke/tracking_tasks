@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy!
 
-    redirect_to task_path, status: :see_other, notice: "Task was successfully destroyed." }
+    redirect_to task_path, status: :see_other, notice: "Task was successfully destroyed."
   end
 
   private
